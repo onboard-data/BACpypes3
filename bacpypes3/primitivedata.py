@@ -131,6 +131,9 @@ class Tag:
             else:
                 raise ValueError("invalid Tag ctor arguments")
 
+    def __repr__(self, ) -> str:
+        return f"{self.tag_class} - {self.tag_number}"
+
     def set(
         self,
         tclass: TagClass,
@@ -483,6 +486,9 @@ class TagList(Iterable):
     def __ne__(self, arg: _Any) -> bool:
         """Inverse of __eq__."""
         return not self.__eq__(arg)
+
+    def __repr__(self, ) -> str:
+        return str(self.tagList)
 
     def peek(self) -> Union[Tag, None]:
         """Return the tag at the front of the list."""

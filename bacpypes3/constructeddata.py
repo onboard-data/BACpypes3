@@ -1842,9 +1842,7 @@ class Any(Element):
         if self._context is not None:
             tag = tag_list.peek()
             if (not tag) or (tag.tag_class != TagClass.closing):
-                raise InvalidTag(f"closing tag {self._context} expected")
-            if tag.tag_class != TagClass.closing:
-                raise InvalidTag(f"closing tag {self._context} expected")
+                raise InvalidTag(f"closing tag {self._context} expected, peeked {tag} off of tags: {tag_list}")
             if tag.tag_number != self._context:
                 raise InvalidTag("mismatched context")
 
