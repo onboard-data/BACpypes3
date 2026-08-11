@@ -70,7 +70,7 @@ class NormalApplication(
                 local_address,
                 device_info_cache,
             )
-        Application.__init__(self, device_info_cache=device_info_cache)
+        Application.__init__(self, device_info_cache=device_info_cache, bind_socket=bind_socket)
         if not isinstance(device_object, DeviceObject):
             raise TypeError(f"device_object: {type(device_object)}")
         if not isinstance(local_address, IPv4Address):
