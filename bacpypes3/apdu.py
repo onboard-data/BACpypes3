@@ -52,7 +52,7 @@ from .basetypes import (
 )
 from .constructeddata import Any, Sequence, SequenceOf
 from .debugging import DebugContents, ModuleLogger, bacpypes_debugging
-from .errors import DecodingError
+from .errors import DecodingError, RejectException
 from .pdu import PCI, PDU, PDUData
 from .primitivedata import (
     Boolean,
@@ -1058,7 +1058,11 @@ class APCISequence(APCI, Sequence):
         # the classmethod cls parameter with our known subclass.  It would have
         # been nicer to have some way of calling apci_sequence_subclass.decode()
         # without it falling back to this function
-        apci_sequence = Sequence.decode(tag_list, class_=apci_sequence_subclass)
+        try:
+            apci_sequence = Sequence.decode(tag_list, class_=apci_sequence_subclass)
+        except RejectException as err:
+            _log.warning(f"Encountered error processing tag_list {tag_list} from apdu {apdu}", exc_info=err)
+            raise
 
         # check for trailing unmatched tags
         # if len(tag_list) != 0:

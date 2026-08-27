@@ -1759,7 +1759,7 @@ class Any(Element):
             elif tag.tag_class == TagClass.closing:
                 if lvl == 0:
                     if tag.tag_number != opening_context:
-                        raise InvalidTag("mismatched context")
+                        raise InvalidTag(f"mismatched context, expected {opening_context}, got {tag.tag_number}")
                     break
                 lvl -= 1
             i += 1
