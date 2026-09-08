@@ -1425,11 +1425,11 @@ class CharacterString(Atomic, str):
 
         min_length = getattr(cls, "_min_length", None)
         if (min_length is not None) and (len(arg) < min_length):
-            raise ValueError(f"minimum length: {min_length}")
+            raise ValueError(f"minimum length: {min_length}, saw {len(arg)} args")
 
         max_length = getattr(cls, "_max_length", None)
         if (max_length is not None) and (len(arg) > max_length):
-            raise ValueError(f"maximum length: {max_length}")
+            raise ValueError(f"maximum length: {max_length}, saw {len(arg)} args")
 
         return arg
 

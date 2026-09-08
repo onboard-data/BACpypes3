@@ -1752,6 +1752,7 @@ class Any(Element):
         # look for the matching closing tag
         i = 1
         lvl = 0
+        first_tag = tag
         while i < len(tag_list.tagList):
             tag = tag_list.tagList[i]
             if tag.tag_class == TagClass.opening:
@@ -1759,7 +1760,7 @@ class Any(Element):
             elif tag.tag_class == TagClass.closing:
                 if lvl == 0:
                     if tag.tag_number != opening_context:
-                        raise InvalidTag(f"mismatched context, expected {opening_context}, got {tag.tag_number}")
+                        raise InvalidTag(f"mismatched context, started with {first_tag}, got {tag} after {i} tags")
                     break
                 lvl -= 1
             i += 1
