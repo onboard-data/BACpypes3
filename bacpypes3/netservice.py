@@ -468,7 +468,8 @@ class NetworkAdapter(Client[PDU], DebugContents):
             try:
                 npdu_class = npdu_types[npdu.npduNetMessage]
             except KeyError:
-                raise RuntimeError(f"unrecognized NPDU type: {npdu.npduNetMessage} for vendor {npdu.npduVendorID}, overall npdu {npdu}")
+                _log.warning(f"unrecognized NPDU type: {npdu.npduNetMessage} for vendor {npdu.npduVendorID}, overall npdu {npdu}")
+                return
             if _debug:
                 NetworkAdapter._debug("    - npdu_class: %r", npdu_class)
 
